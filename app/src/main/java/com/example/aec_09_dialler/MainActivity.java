@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -54,6 +55,11 @@ public class MainActivity extends AppCompatActivity {
                 if (temp.length()<10){
                     Toast.makeText(MainActivity.this, "NUM MUST BE 10 DIGIT", Toast.LENGTH_SHORT).show();
                 }else if(temp.length()==10) {
+                    String number = TV_NumberField.getText().toString();
+                    Intent saveIntent = new Intent(Intent.ACTION_INSERT);
+                    saveIntent.setType(ContactsContract.Contacts.CONTENT_TYPE);
+                    saveIntent.putExtra(ContactsContract.Intents.Insert.PHONE,number);
+                    startActivity(saveIntent);
                     Toast.makeText(MainActivity.this, "SAVED", Toast.LENGTH_SHORT).show();
 
                 }
